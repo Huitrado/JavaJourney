@@ -1,6 +1,7 @@
 class Persona{
     private String nombre;//Estos solo pueden ser modificados en la misma clase o metodos de la propia clase
     //Un atributo consta de visibilidad, tipo de dato y nombre
+
     public void modificarNombre(String nuevoNombre){
         this.nombre = nuevoNombre;
     }
