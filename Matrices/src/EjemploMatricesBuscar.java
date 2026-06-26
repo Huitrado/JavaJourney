@@ -17,9 +17,7 @@ public class EjemploMatricesBuscar {
                     encontrado = true;
                     break buscar;
                 }
-                j = 0;
             }
-            i++;
         }
 
         if (encontrado){
