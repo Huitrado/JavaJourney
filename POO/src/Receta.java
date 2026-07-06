@@ -21,6 +21,4 @@ public class Receta {
             System.out.println(ingrediente);
         }
     }
-
-
 }
