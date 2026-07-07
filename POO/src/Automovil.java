@@ -2,12 +2,23 @@ class Automovil {
     private int id;
     private String fabricante;
     private String modelo;
-    private String color;
+    private Color color = Color.GRIS;
     private double cilindros;
     private int capacidadTanque = 40;
-    static String colorPatente = "Naranja";
+    static Color colorPatente = Color.NARANJO;
     private static int capacidadTanqueEstatico = 50;
     private static int ultimoId;
+
+    private TipoAutomovil tipo;
+    //Final debe ser un atributo statico y si se implementa en una clase significa que la clase no puede tener subclases
+    public static final Integer VELOCIDAD_MAX_CARRETERA = 120; //Es como una variable global
+    public static final int VELOCIDAD_MAX_CIUDAD = 60;
+
+    public static final String COLOR_ROJO = "Rojo";
+    public static final String COLOR_AMARILLO = "Amarillo";
+    public static final String COLOR_AZUL = "Azul";
+    public static final String COLOR_BLANCO = "Blanco";
+    public static final String COLOR_GRIS = "Gris oscuro";
 
     //COnstructor vacio, esto se le llama sobrecarga de constructor
     public Automovil(){
@@ -22,18 +33,18 @@ class Automovil {
     }
 
     //Constructor que reutiliza el anterior constructor
-    public Automovil(String fabricante, String modelo, String color){
+    public Automovil(String fabricante, String modelo, Color color){
         this(fabricante, modelo);
         this.color = color;
     }
 
     //Constructor que reutiliza el anterior constructor
-    public Automovil(String fabricante, String modelo, String color, double cilindros){
+    public Automovil(String fabricante, String modelo, Color color, double cilindros){
         this(fabricante, modelo, color);
         this.cilindros = cilindros;
     }
 
-    public Automovil(String fabricante, String modelo, String color, double cilindros, int capacidadTanque){
+    public Automovil(String fabricante, String modelo, Color color, double cilindros, int capacidadTanque){
         this(fabricante, modelo, color, cilindros);
         this.capacidadTanque = capacidadTanque;
     }
@@ -62,11 +73,11 @@ class Automovil {
 
 
 
-    public String getColor() {
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(Color color) {
         this.color = color;
     }
 
@@ -95,12 +106,20 @@ class Automovil {
         this.capacidadTanque = capacidadTanque;
     }
 
-    public static String getColorPatente(){
+    public static Color getColorPatente(){
         return colorPatente;
     }
 
-    public static void setColorPatente(String colorPatente){
+    public static void setColorPatente(Color colorPatente){
         Automovil.colorPatente = colorPatente; //Como es un atributo static se hace referencia al atributo con el nombre de la clase
+    }
+
+    public TipoAutomovil getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoAutomovil tipo) {
+        this.tipo = tipo;
     }
 
     //No es tan buena idea imprimir datos en terminal, sino trabajar con ellos y retornarlos

@@ -3,9 +3,20 @@ public class Receta {
     private int dificultad;
     private String[] ingredientes;
 
+    //Constructor sin argumentos
+    Receta(){
+        nombre = "Enchiladas";
+    }
+    //Sobrecarga de constructor
+    Receta(String nombre){
+        this.nombre = nombre;
+    }
+
+    //Esto es un setter
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
 
     public void setDificultad (int dificultad){
         this.dificultad = dificultad;
