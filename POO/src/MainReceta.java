@@ -15,5 +15,7 @@ public class MainReceta {
         //Llamamos al metodo mostrar ingredientes
         recetaEnchiladas.mostrarIngredientes();
 
+        System.out.println("El nombre de la receta es valido? " + (Receta.validarNombre("Caca") ? "Si" : "No"));
+
     }
 }

@@ -3,8 +3,12 @@ class Automovil {
     private String fabricante;
     private String modelo;
     private Color color = Color.GRIS;
-    private double cilindros;
-    private int capacidadTanque = 40;
+    private Motor motor;
+    private Estanque estanque;
+    private Persona propietario;
+    private Rueda[] ruedas;
+
+
     static Color colorPatente = Color.NARANJO;
     private static int capacidadTanqueEstatico = 50;
     private static int ultimoId;
@@ -39,16 +43,22 @@ class Automovil {
     }
 
     //Constructor que reutiliza el anterior constructor
-    public Automovil(String fabricante, String modelo, Color color, double cilindros){
+    public Automovil(String fabricante, String modelo, Color color, Motor motor){
         this(fabricante, modelo, color);
-        this.cilindros = cilindros;
+        this.motor = motor;
     }
 
-    public Automovil(String fabricante, String modelo, Color color, double cilindros, int capacidadTanque){
-        this(fabricante, modelo, color, cilindros);
-        this.capacidadTanque = capacidadTanque;
+    public Automovil(String fabricante, String modelo, Color color, Motor motor, Estanque estanque){
+        this(fabricante, modelo, color, motor);
+        this.estanque = estanque;
     }
 
+
+    public Automovil(String fabricante, String modelo, Color color, Motor motor, Estanque estanque, Persona propietario, Rueda[] ruedas) {
+        this(fabricante, modelo, color, motor, estanque);
+        this.propietario = propietario;
+        this.ruedas = ruedas;
+    }
 
     //Getter y setter por el ocultamiento de los atributos
     public int getId(){
@@ -89,21 +99,23 @@ class Automovil {
         Automovil.capacidadTanqueEstatico = capacidadTanqueEstatico;
     }
 
-
-    public double getCilindros() {
-        return cilindros;
+    public Estanque getEstanque() {
+        if (estanque == null){
+            this.estanque = new Estanque();
+        }
+        return estanque;
     }
 
-    public void setCilindros(double cilindros) {
-        this.cilindros = cilindros;
+    public void setEstanque(Estanque estanque) {
+        this.estanque = estanque;
     }
 
-    public int getCapacidadTanque() {
-        return capacidadTanque;
+    public Motor getMotor() {
+        return motor;
     }
 
-    public void setCapacidadTanque(int capacidadTanque) {
-        this.capacidadTanque = capacidadTanque;
+    public void setMotor(Motor motor) {
+        this.motor = motor;
     }
 
     public static Color getColorPatente(){
@@ -128,9 +140,15 @@ class Automovil {
         sb.append("ID = " + this.getId());
         sb.append("\nfabricante = " +this.fabricante);
         sb.append("\nmodelo = " + this.modelo);
+        if (this.getTipo() != null){
+            sb.append("\ntipo = " + this.getTipo().getDescripcion());
+        }
         sb.append("\ncolor = " + this.color);
-        sb.append("\ncilindros = " + this.cilindros);
+        sb.append("\ncilindros = " + motor.getCilindrada());
         sb.append("\ncolor patente = " + colorPatente); //Como es una variable static no es necesario referirnos al objeto como tal, ya que es una variable general que se comparte en todas las instancias de esa clase
+        if (this.motor !=  null){
+            sb.append("\nauto.cilindrada =" + this.motor.getCilindrada());
+        }
         return sb.toString();
     }
 
@@ -149,11 +167,11 @@ class Automovil {
     }
 
     public double calcularConsumo(int km, double porcentajeBencina){ //Sobre carga de metodos
-        return km/(porcentajeBencina * this.capacidadTanque);
+        return km/(porcentajeBencina * estanque.getCapacidad());
     }
 
     public double calcularConsumo(int km, int porcentajeBencina){ //Sobre carga de metodos
-        return km/((porcentajeBencina / 100f) * this.capacidadTanque); //Es necesario dividirlo entre 100f ya que el resultado
+        return km/((porcentajeBencina / 100f) * estanque.getCapacidad()); //Es necesario dividirlo entre 100f ya que el resultado
     }
 
     public static double calcularConsumoEstatico(int km, int porcentajeBencina){
@@ -177,8 +195,8 @@ class Automovil {
                 "fabricante='" + fabricante + '\'' +
                 ", modelo='" + modelo + '\'' +
                 ", color='" + color + '\'' +
-                ", cilindros=" + cilindros +
-                ", capacidadTanque=" + capacidadTanque +
+                ", cilindros=" + motor.getCilindrada() +
+                ", capacidadTanque=" + estanque.getCapacidad() +
                 '}';
     }
 }

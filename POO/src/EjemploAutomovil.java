@@ -7,23 +7,24 @@ public class EjemploAutomovil {
 
 
         auto.setColor(Color.NEGRO);
-        auto.setCilindros(200);
-        auto.setCapacidadTanque(500);
+        auto.setMotor(new Motor(2.2, TipoMotor.BENCINA));
+        auto.setEstanque(new Estanque(50));
+        auto.setTipo(TipoAutomovil.STATION_WAGON);
         System.out.println("Velocidad Maxima carretera" + Automovil.VELOCIDAD_MAX_CARRETERA);
         System.out.println("Velocidad Maxima ciudad " + Automovil.VELOCIDAD_MAX_CIUDAD);
 
 
         //Esto es una entidad
         Automovil mazda = new Automovil("Mazda", "BT-50", Color.ROJO);
-        mazda.setCilindros(200);
+        mazda.setMotor(new Motor(2.0, TipoMotor.DIESEL));
         mazda.setFabricante("Popo");
-        mazda.setCapacidadTanque(500);
+        mazda.setEstanque(new Estanque(45));
         mazda.setColor(Color.BLANCO);
         mazda.setTipo(TipoAutomovil.HATCHBACK);
 
 
-        Automovil nissan = new Automovil("Nissan", "Navara", Color.GRIS, 3.5, 50);
-        Automovil nissan2 = new Automovil("Nissan", "Navara", Color.GRIS, 3.5, 50);
+        Automovil nissan = new Automovil("Nissan", "Navara", Color.GRIS, new Motor(4.0, TipoMotor.DIESEL), new Estanque(45));
+        Automovil nissan2 = new Automovil("Nissan", "Navara", Color.GRIS, new Motor(2.3, TipoMotor.DIESEL), new Estanque(35));
         Automovil auto1 = new Automovil();
         System.out.println(nissan.equals(nissan2));
         System.out.println("=====Detalle del auto de David Yoel=====");
