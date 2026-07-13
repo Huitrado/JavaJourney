@@ -1,4 +1,4 @@
-class Automovil {
+public class Automovil implements Comparable<Automovil>{
     private int id;
     private String fabricante;
     private String modelo;
@@ -7,6 +7,7 @@ class Automovil {
     private Estanque estanque;
     private Persona propietario;
     private Rueda[] ruedas;
+    private int indiceRuedas = 0;
 
 
     static Color colorPatente = Color.NARANJO;
@@ -27,6 +28,7 @@ class Automovil {
     //COnstructor vacio, esto se le llama sobrecarga de constructor
     public Automovil(){
         this.id = ++ultimoId;
+        this.ruedas = new Rueda[5];
     }
 
     //Constructor con dos parametro
@@ -134,20 +136,56 @@ class Automovil {
         this.tipo = tipo;
     }
 
+    public Persona getPropietario(){return propietario;}
+
+    public void setPropietario(Persona propietario){
+        this.propietario = propietario;
+    }
+
+    public Rueda[] getRuedas() {
+        return ruedas;
+    }
+
+    public void setRuedas(Rueda[] ruedas) {
+        this.ruedas = ruedas;
+    }
+
+    public Automovil addRueda(Rueda rueda){
+        if (indiceRuedas < this.ruedas.length){
+            this.ruedas[indiceRuedas++] = rueda;
+        }
+        return this;//Al hacer el return this. regresa la misma instancia por lo que nos permite encadenar metodos
+
+
+    }
+
     //No es tan buena idea imprimir datos en terminal, sino trabajar con ellos y retornarlos
     public String verDetalle(){ //Cuando se quiere acceder a un atributo de la misma clase, se usa el operador
         StringBuilder sb = new StringBuilder();
         sb.append("ID = " + this.getId());
         sb.append("\nfabricante = " +this.fabricante);
         sb.append("\nmodelo = " + this.modelo);
+
         if (this.getTipo() != null){
             sb.append("\ntipo = " + this.getTipo().getDescripcion());
         }
         sb.append("\ncolor = " + this.color);
         sb.append("\ncilindros = " + motor.getCilindrada());
         sb.append("\ncolor patente = " + colorPatente); //Como es una variable static no es necesario referirnos al objeto como tal, ya que es una variable general que se comparte en todas las instancias de esa clase
+
         if (this.motor !=  null){
             sb.append("\nauto.cilindrada =" + this.motor.getCilindrada());
+        }
+        if (propietario != null){
+            sb.append("\nConductor del auto: " + this.getPropietario());
+        }
+
+        if (getRuedas() != null){
+            sb.append("\nRuedas del automovil: ");
+            for (Rueda rueda: this.getRuedas()){
+                sb.append("\nFabricante: " + rueda.getFabricante() + " Aro:" +rueda.getAro() + " Ancho: " + rueda.getAncho());
+            }
+
         }
         return sb.toString();
     }
@@ -191,13 +229,12 @@ class Automovil {
 
     @Override
     public String toString() {
-        return "Automovil{" +
-                "fabricante='" + fabricante + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", color='" + color + '\'' +
-                ", cilindros=" + motor.getCilindrada() +
-                ", capacidadTanque=" + estanque.getCapacidad() +
-                '}';
+        return this.id + " :" + fabricante + " " + modelo;
+    }
+
+    @Override
+    public int compareTo(Automovil a) {
+        return this.propietario.toString().compareTo(a.propietario.toString());
     }
 }
 
