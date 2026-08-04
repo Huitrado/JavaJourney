@@ -2,23 +2,53 @@ package org.lhuitrado.poosobrecarga;
 
 public class Calculadora {
 
-    public int sumar(int a, int b){
+    //Agregamos sobrecarga de metodos para cuando tenemos n cantidad de parametros de x tipo
+    //se le manda x cantidad de parametros y en el metodo son recibidos como un arreglos
+
+    private Calculadora() {
+    }
+
+    public static int sumar(int... argumentos){
+        int total = 0;
+        for (int i: argumentos){
+            total += i;
+        }
+        return total;
+    }
+
+    public static float sumar(float a, int... argumentos){ //el argumento argumentos es un arreglo
+        float total = a;
+        for (int i: argumentos){
+            total += i;
+        }
+        return total;
+    }
+
+    public static double sumar(double... varargs){
+        double total = 0D;
+        for (double i: varargs){
+            total += i;
+        }
+        return total;
+    }
+
+    public static int sumar(int a, int b){
         return a + b;
     }
 
-    public float sumar(int a, float b){
+    public static float sumar(int a, float b){
         return a + b;
     }
 
-    public float sumar(float a, float b){
+    public static float sumar(float a, float b){
         return a + b;
     }
 
-    public float sumar(float a, int b){
+    public static float sumar(float a, int b){
         return a + b;
     }
 
-    public int sumar(String a, String b){
+    public static int sumar(String a, String b){
         int resultado;
         try{
             resultado =  Integer.parseInt(a) + Integer.parseInt(b);
@@ -28,7 +58,7 @@ public class Calculadora {
         return resultado;
     }
 
-    public int sumar(int a, int b, int c){
+    public static int sumar(int a, int b, int c){
         return a + b + c;
     }
 
